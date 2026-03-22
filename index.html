@@ -924,31 +924,22 @@ function renderQuestions() {
   let html = '';
   let globalIdx = 1;
 
-  DIMENSIONS.forEach(dim => {
-    const dimQs = QUESTIONS.filter(q => q.dimension === dim);
-    html += `<div class="category-group">
-      <div class="category-label" style="color:${DIM_COLORS[dim]}">${dim}</div>`;
-
-    dimQs.forEach(q => {
-      html += `<div class="q-card" id="card-${q.id}">
-        <div class="q-header">
-          <div class="q-num">${String(globalIdx).padStart(2,'0')}</div>
-          <div>
-            <div class="q-text">${q.label}</div>
-            <div class="q-importance">Importance weight: ${q.importance.toFixed(3)}</div>
-          </div>
+  QUESTIONS.forEach(q => {
+    html += `<div class="q-card" id="card-${q.id}">
+      <div class="q-header">
+        <div class="q-num">${String(globalIdx).padStart(2,'0')}</div>
+        <div>
+          <div class="q-text">${q.label}</div>
         </div>
-        <div class="options-grid">`;
+      </div>
+      <div class="options-grid">`;
 
-      q.options.forEach((opt, i) => {
-        html += `<button class="option-btn" id="opt-${q.id}-${i}" onclick="selectOption('${q.id}', ${i}, ${opt.coef})">${opt.label}</button>`;
-      });
-
-      html += `</div></div>`;
-      globalIdx++;
+    q.options.forEach((opt, i) => {
+      html += `<button class="option-btn" id="opt-${q.id}-${i}" onclick="selectOption('${q.id}', ${i}, ${opt.coef})">${opt.label}</button>`;
     });
 
-    html += `</div>`;
+    html += `</div></div>`;
+    globalIdx++;
   });
 
   container.innerHTML = html;
