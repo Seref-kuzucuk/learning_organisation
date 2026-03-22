@@ -698,9 +698,9 @@
   <!-- HERO -->
   <section id="hero-section" class="active">
     <div class="hero">
-      <div class="hero-tag">Boruta Algorithm · Evidence-Based</div>
-      <h1>Is Your Organization<br><span class="gradient-text">Truly Learning?</span></h1>
-      <p>Complete this 15-question assessment to determine whether your organization qualifies as a Learning Organization, based on validated research and advanced feature selection.</p>
+      <div class="hero-tag">Powered by a Random Forest–based predictive model with feature selection</div>
+      <h1>Assess Your Organization as a<br><span class="gradient-text">Big Data–Driven Learning Organization</span></h1>
+      <p>Complete the assessment by providing information about your organization's data practices, technological infrastructure, and decision-making processes.</p>
       <div class="hero-stats">
         <div class="stat">
           <div class="stat-num">15</div>
@@ -716,9 +716,10 @@
         </div>
       </div>
       <button class="btn-start" onclick="startAssessment()">
-        Begin Assessment
+        Start Assessment
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
+      <p style="margin-top:20px;font-size:13px;color:var(--muted);font-weight:300;max-width:560px;margin-left:auto;margin-right:auto;">This system evaluates your organization's readiness as a big data driven learning organization based on key predictive variables identified through machine learning analysis.</p>
     </div>
   </section>
 
@@ -1043,7 +1044,7 @@ function showResult(score, isLearning, dimScores) {
     <div class="result-hero">
       <div class="result-badge ${isLearning ? 'positive' : 'negative'}">
         <div class="result-icon">${isLearning ? '🌟' : '📊'}</div>
-        <div class="result-title">${isLearning ? 'Learning Organization' : 'Not Yet a Learning Organization'}</div>
+        <div class="result-title">${isLearning ? 'Classification Result: Learning Organization' : 'Classification Result: Not a Learning Organization'}</div>
         <div class="result-sub">${isLearning
           ? 'Your organization demonstrates the characteristics of a learning organization.'
           : 'Your organization has growth opportunities to become a learning organization.'
@@ -1083,7 +1084,7 @@ function showResult(score, isLearning, dimScores) {
           </div>
           <div class="score-row">
             <span class="label">Result</span>
-            <span class="value" style="color:${isLearning ? '#10b981' : '#ef4444'}">${isLearning ? '✓ Above Threshold' : '✗ Below Threshold'}</span>
+            <span class="value" style="color:${isLearning ? '#10b981' : '#ef4444'}">${isLearning ? '✓ Classified as Learning Organization (Above Threshold)' : '✗ Below Threshold'}</span>
           </div>
         </div>
       </div>
@@ -1097,7 +1098,7 @@ function showResult(score, isLearning, dimScores) {
     <div class="result-actions">
       <button class="btn-action btn-pdf" onclick="downloadPDF(${score}, ${isLearning})">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-        Download PDF Report
+        Download Assessment Report
       </button>
       <button class="btn-action btn-reset" onclick="resetAssessment()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.15"/></svg>
