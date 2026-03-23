@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Learning Organization Assessment</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
   :root {
@@ -26,7 +26,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
@@ -120,6 +120,7 @@
     color: var(--accent);
     font-weight: 500;
     margin-bottom: 28px;
+    font-family: 'Times New Roman', Times, serif;
   }
 
   .hero-tag::before {
@@ -193,7 +194,7 @@
     padding: 16px 36px;
     background: linear-gradient(135deg, var(--accent), var(--accent3));
     color: white;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     font-weight: 700;
     font-size: 16px;
     border: none;
@@ -375,8 +376,8 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     color: var(--muted);
-    font-size: 13px;
-    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
     font-weight: 400;
     cursor: pointer;
     transition: all 0.15s;
@@ -415,7 +416,7 @@
     padding: 16px 48px;
     background: linear-gradient(135deg, var(--accent), var(--accent3));
     color: white;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     font-weight: 700;
     font-size: 16px;
     border: none;
@@ -452,12 +453,13 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    padding: 40px 60px;
-    border-radius: 24px;
+    gap: 10px;
+    padding: 28px 40px;
+    border-radius: 20px;
     margin-bottom: 24px;
     position: relative;
     overflow: hidden;
+    width: 100%;
   }
 
   .result-badge.positive {
@@ -471,24 +473,26 @@
   }
 
   .result-icon {
-    font-size: 56px;
+    font-size: 40px;
     line-height: 1;
   }
 
   .result-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-align: center;
   }
 
   .result-badge.positive .result-title { color: var(--success); }
   .result-badge.negative .result-title { color: var(--danger); }
 
   .result-sub {
-    font-size: 15px;
+    font-size: 14px;
     color: var(--muted);
-    font-weight: 300;
+    font-weight: 400;
+    text-align: center;
   }
 
   /* Score gauge */
@@ -701,20 +705,7 @@
       <div class="hero-tag">Powered by a Random Forest–based predictive model with feature selection</div>
       <h1>Assess Your Organization as a<br><span class="gradient-text">Big Data–Driven Learning Organization</span></h1>
       <p>Complete the assessment by providing information about your organization's data practices, technological infrastructure, and decision-making processes.</p>
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-num">15</div>
-          <div class="stat-label">Questions</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">5</div>
-          <div class="stat-label">Dimensions</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">~3min</div>
-          <div class="stat-label">Duration</div>
-        </div>
-      </div>
+
       <button class="btn-start" onclick="startAssessment()">
         Start Assessment
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1230,7 +1221,18 @@ function downloadPDF(score, isLearning) {
   doc.setFontSize(8);
   doc.setFont('helvetica', 'bold');
   doc.text('DETAILED RESPONSES', margin, y);
-  y += 8;
+  y += 6;
+
+  // Table header
+  doc.setFillColor(26, 37, 64);
+  doc.rect(margin, y, W - margin * 2, 9, 'F');
+  doc.setTextColor(150, 180, 220);
+  doc.setFontSize(7);
+  doc.text('Q#', margin + 2, y + 6);
+  doc.text('Question', margin + 14, y + 6);
+  doc.text('Answer', margin + 80, y + 6);
+  doc.text('Contribution', margin + 148, y + 6);
+  y += 11;
 
   QUESTIONS.forEach((q, idx) => {
     const ans = answers[q.id];
@@ -1242,27 +1244,33 @@ function downloadPDF(score, isLearning) {
     }
 
     const contrib = q.importance * ans.coef;
-    const bg = idx % 2 === 0 ? [17, 24, 39] : [19, 30, 53];
+    const bg = idx % 2 === 0 ? [17, 24, 39] : [22, 33, 55];
     doc.setFillColor(...bg);
-    doc.rect(margin, y, W - margin * 2, 11, 'F');
+    doc.rect(margin, y, W - margin * 2, 10, 'F');
 
+    // Q#
     doc.setTextColor(100, 116, 139);
     doc.setFontSize(7.5);
     doc.setFont('helvetica', 'normal');
     doc.text(q.id, margin + 2, y + 7);
 
-    doc.setTextColor(241, 245, 249);
-    doc.text(q.label.substring(0, 30), margin + 16, y + 7);
+    // Question label — truncate to fit column
+    doc.setTextColor(220, 230, 245);
+    const qLabel = q.label.length > 28 ? q.label.substring(0, 26) + '..' : q.label;
+    doc.text(qLabel, margin + 14, y + 7);
 
+    // Answer — truncate to fit column
     doc.setTextColor(150, 180, 220);
-    doc.text(q.options[ans.optIdx].label.substring(0, 28), margin + 90, y + 7);
+    const aLabel = q.options[ans.optIdx].label.length > 22 ? q.options[ans.optIdx].label.substring(0, 20) + '..' : q.options[ans.optIdx].label;
+    doc.text(aLabel, margin + 80, y + 7);
 
+    // Contribution — right-aligned in its column
     const cColor = contrib >= 0 ? [16, 185, 129] : [239, 68, 68];
     doc.setTextColor(...cColor);
     doc.setFont('helvetica', 'bold');
-    doc.text((contrib >= 0 ? '+' : '') + contrib.toFixed(4), margin + 154, y + 7);
+    doc.text((contrib >= 0 ? '+' : '') + contrib.toFixed(4), margin + 168, y + 7, { align: 'right' });
 
-    y += 12;
+    y += 11;
   });
 
   // Footer
