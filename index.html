@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Learning Organization Assessment</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
   :root {
@@ -26,7 +26,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'DM Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
@@ -120,7 +120,6 @@
     color: var(--accent);
     font-weight: 500;
     margin-bottom: 28px;
-    font-family: 'Times New Roman', Times, serif;
   }
 
   .hero-tag::before {
@@ -194,7 +193,7 @@
     padding: 16px 36px;
     background: linear-gradient(135deg, var(--accent), var(--accent3));
     color: white;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Syne', sans-serif;
     font-weight: 700;
     font-size: 16px;
     border: none;
@@ -376,8 +375,8 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     color: var(--muted);
-    font-size: 14px;
-    font-family: 'Times New Roman', Times, serif;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
     font-weight: 400;
     cursor: pointer;
     transition: all 0.15s;
@@ -416,7 +415,7 @@
     padding: 16px 48px;
     background: linear-gradient(135deg, var(--accent), var(--accent3));
     color: white;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Syne', sans-serif;
     font-weight: 700;
     font-size: 16px;
     border: none;
@@ -453,13 +452,12 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 28px 40px;
-    border-radius: 20px;
+    gap: 12px;
+    padding: 40px 60px;
+    border-radius: 24px;
     margin-bottom: 24px;
     position: relative;
     overflow: hidden;
-    width: 100%;
   }
 
   .result-badge.positive {
@@ -473,26 +471,24 @@
   }
 
   .result-icon {
-    font-size: 40px;
+    font-size: 56px;
     line-height: 1;
   }
 
   .result-title {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 0;
-    text-align: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
   }
 
   .result-badge.positive .result-title { color: var(--success); }
   .result-badge.negative .result-title { color: var(--danger); }
 
   .result-sub {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--muted);
-    font-weight: 400;
-    text-align: center;
+    font-weight: 300;
   }
 
   /* Score gauge */
@@ -702,15 +698,27 @@
   <!-- HERO -->
   <section id="hero-section" class="active">
     <div class="hero">
-      <div class="hero-tag">Powered by a Random Forest–based predictive model with feature selection</div>
-      <h1>Assess Your Organization as a<br><span class="gradient-text">Big Data–Driven Learning Organization</span></h1>
-      <p>Complete the assessment by providing information about your organization's data practices, technological infrastructure, and decision-making processes.</p>
-
+      <div class="hero-tag">Boruta Algorithm · Evidence-Based</div>
+      <h1>Is Your Organization<br><span class="gradient-text">Truly Learning?</span></h1>
+      <p>Complete this 15-question assessment to determine whether your organization qualifies as a Learning Organization, based on validated research and advanced feature selection.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">15</div>
+          <div class="stat-label">Questions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Dimensions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">~3min</div>
+          <div class="stat-label">Duration</div>
+        </div>
+      </div>
       <button class="btn-start" onclick="startAssessment()">
-        Start Assessment
+        Begin Assessment
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
-      <p style="margin-top:20px;font-size:13px;color:var(--muted);font-weight:300;max-width:560px;margin-left:auto;margin-right:auto;">This system evaluates your organization's readiness as a big data driven learning organization based on key predictive variables identified through machine learning analysis.</p>
     </div>
   </section>
 
@@ -747,14 +755,14 @@ const THRESHOLD = 9.1864;
 
 const QUESTIONS = [
   {
-    id: 'Q1', label: 'Gender', dimension: 'Demographic Profile', importance: 4.160,
+    id: 'Q1', label: 'Gender', text: 'What is your gender?', dimension: 'Demographic Profile', importance: 4.160,
     options: [
       { label: 'Female', coef: 0 },
       { label: 'Male', coef: -0.1664 }
     ]
   },
   {
-    id: 'Q3', label: 'Work Experience', dimension: 'Demographic Profile', importance: 3.090,
+    id: 'Q3', label: 'Work Experience', text: 'How many years of total work experience do you have?', dimension: 'Demographic Profile', importance: 3.090,
     options: [
       { label: '0–3 years', coef: 0 },
       { label: '4–7 years', coef: -0.00309 },
@@ -763,7 +771,7 @@ const QUESTIONS = [
     ]
   },
   {
-    id: 'Q4', label: 'Company Business Line', dimension: 'Organizational Context', importance: 8.220,
+    id: 'Q4', label: 'Company Business Line', text: 'What is the primary business line or sector in which your company operates?', dimension: 'Organizational Context', importance: 8.220,
     options: [
       { label: 'Information Technology', coef: 0 },
       { label: 'Education', coef: 0.1644 },
@@ -779,7 +787,7 @@ const QUESTIONS = [
     ]
   },
   {
-    id: 'Q5', label: 'Position in Company', dimension: 'Organizational Context', importance: 3.410,
+    id: 'Q5', label: 'Position in Company', text: 'What is your current position or role within the company?', dimension: 'Organizational Context', importance: 3.410,
     options: [
       { label: 'Business Owner', coef: 0 },
       { label: 'Manager', coef: 0.1023 },
@@ -787,7 +795,7 @@ const QUESTIONS = [
     ]
   },
   {
-    id: 'Q6', label: 'Business Life Cycle Stage', dimension: 'Organizational Context', importance: 6.140,
+    id: 'Q6', label: 'Business Life Cycle Stage', text: 'Which stage of the business life cycle best describes your company?', dimension: 'Organizational Context', importance: 6.140,
     options: [
       { label: 'Low (1–22)', coef: 0 },
       { label: 'Medium Low (23–44)', coef: 0.3684 },
@@ -797,16 +805,16 @@ const QUESTIONS = [
     ]
   },
   {
-    id: 'Q7', label: 'Number of Personnel', dimension: 'Organizational Context', importance: 6.050,
+    id: 'Q7', label: 'Number of Personnel', text: 'Approximately how many employees currently work in your company?', dimension: 'Organizational Context', importance: 6.050,
     options: [
       { label: 'Less than 10', coef: 0 },
-      { label: '11–50', coef: 0.121 },
-      { label: '51–250', coef: -0.0363 },
+      { label: 'Between 11–50', coef: 0.121 },
+      { label: 'Between 51–250', coef: -0.0363 },
       { label: 'More than 250', coef: -0.7865 }
     ]
   },
   {
-    id: 'Q8', label: 'Big Data Knowledge Level', dimension: 'Data Literacy', importance: 8.640,
+    id: 'Q8', label: 'Big Data Knowledge Level', text: 'How would you describe your level of knowledge and understanding of big data and its applications in business?', dimension: 'Data Literacy', importance: 8.640,
     options: [
       { label: 'Very Low', coef: 0 },
       { label: 'Basic Level', coef: 0.9504 },
@@ -816,7 +824,7 @@ const QUESTIONS = [
     ]
   },
   {
-    id: 'Q9', label: 'Big Data Usage Frequency', dimension: 'Data Literacy', importance: 6.140,
+    id: 'Q9', label: 'Big Data Usage Frequency', text: 'To what extent does your company currently use big data in its business operations and decision-making processes?', dimension: 'Data Literacy', importance: 6.140,
     options: [
       { label: 'Never', coef: 0 },
       { label: 'Rarely', coef: -0.1842 },
@@ -825,70 +833,70 @@ const QUESTIONS = [
     ]
   },
   {
-    id: 'Q10', label: 'Data Science Expert on Team', dimension: 'Data Literacy', importance: 3.250,
+    id: 'Q10', label: 'Data Science Expert on Team', text: 'Does your company have employees with specialized knowledge or expertise in data science, big data analytics, or related analytical fields?', dimension: 'Data Literacy', importance: 3.250,
     options: [
       { label: 'Yes', coef: 0 },
       { label: 'No', coef: 0.4225 }
     ]
   },
   {
-    id: 'Q11', label: 'Data Platform Services Used', dimension: 'Technology & Infrastructure', importance: 12.410,
+    id: 'Q11', label: 'Data Platform Services Used', text: 'To what extent does your company use data platforms or data-related digital services to collect, store, process, and analyze data?', dimension: 'Technology & Infrastructure', importance: 12.410,
     options: [
       { label: 'Big Data Platforms', coef: 0 },
       { label: 'Data Mining Software', coef: 1.6133 },
-      { label: 'Cloud-Based Analytics', coef: 2.3579 },
+      { label: 'Cloud-Based Data Analytics Services', coef: 2.3579 },
       { label: 'Advanced Analytics Software', coef: 1.9856 },
       { label: 'Other', coef: -0.2482 }
     ]
   },
   {
-    id: 'Q12', label: 'Big Data Analysis & Monitoring', dimension: 'Learning Practices', importance: 16.270,
+    id: 'Q12', label: 'Big Data Analysis & Monitoring', text: 'To what extent does your business use the monitoring of big data analysis results to improve its business processes?', dimension: 'Learning Practices', importance: 16.270,
     options: [
-      { label: 'Strongly Disagree', coef: 0 },
-      { label: 'Disagree', coef: -2.7659 },
-      { label: 'Neutral', coef: 1.3016 },
-      { label: 'Agree', coef: -1.3016 },
-      { label: 'Strongly Agree', coef: 1.6011 }
+      { label: 'Never', coef: 0 },
+      { label: 'Rarely', coef: -2.7659 },
+      { label: 'Sometimes', coef: 1.3016 },
+      { label: 'Frequently', coef: -1.3016 },
+      { label: 'Very frequently', coef: 1.6011 }
     ]
   },
   {
-    id: 'Q13', label: 'Big Data Collaboration', dimension: 'Learning Practices', importance: 24.020,
+    id: 'Q13', label: 'Big Data Collaboration', text: 'To what extent are big data analysis results communicated across departments to support organizational collaboration?', dimension: 'Learning Practices', importance: 24.020,
     options: [
-      { label: 'Strongly Disagree', coef: 0 },
-      { label: 'Disagree', coef: 3.3628 },
-      { label: 'Neutral', coef: -4.0834 },
-      { label: 'Agree', coef: 2.8824 },
-      { label: 'Strongly Agree', coef: 4.0834 }
+      { label: 'Never', coef: 0 },
+      { label: 'Rarely', coef: 3.3628 },
+      { label: 'Sometimes', coef: -4.0834 },
+      { label: 'Frequently', coef: 2.8824 },
+      { label: 'Very frequently', coef: 4.0834 }
     ]
   },
   {
-    id: 'Q14', label: 'Big Data Technology Usage', dimension: 'Learning Practices', importance: 23.650,
+    id: 'Q14', label: 'Big Data Technology Usage', text: 'To what extent does your business employ advanced technologies and analytical tools in its use of big data?', dimension: 'Learning Practices', importance: 23.650,
     options: [
-      { label: 'Strongly Disagree', coef: 0 },
-      { label: 'Disagree', coef: -1.6555 },
-      { label: 'Neutral', coef: 1.6555 },
-      { label: 'Agree', coef: 7.095 },
-      { label: 'Strongly Agree', coef: 8.041 }
+      { label: 'Not at all', coef: 0 },
+      { label: 'To a small extent', coef: -1.6555 },
+      { label: 'To a moderate extent', coef: 1.6555 },
+      { label: 'To a great extent', coef: 7.095 },
+      { label: 'To a very great extent', coef: 8.041 }
     ]
   },
   {
-    id: 'Q15', label: 'Data Security Awareness', dimension: 'Learning Practices', importance: 20.630,
+    id: 'Q15', label: 'Data Security Awareness', text: 'To what extent are employees informed about data security and privacy practices?', dimension: 'Learning Practices', importance: 20.630,
     options: [
-      { label: 'Strongly Disagree', coef: 0 },
-      { label: 'Disagree', coef: 2.8882 },
-      { label: 'Neutral', coef: 5.3638 },
-      { label: 'Agree', coef: 7.2205 },
-      { label: 'Strongly Agree', coef: 8.8709 }
+      { label: 'Not at all', coef: 0 },
+      { label: 'To a small extent', coef: 2.8882 },
+      { label: 'To a moderate extent', coef: 5.3638 },
+      { label: 'To a great extent', coef: 7.2205 },
+      { label: 'To a very great extent', coef: 8.8709 }
     ]
   },
   {
-    id: 'Q16', label: 'Data-Driven Decision Making', dimension: 'Learning Practices', importance: 17.790,
+    id: 'Q16', label: 'Data-Driven Decision Making', text: 'To what extent are employees encouraged to base their decisions on data?', dimension: 'Learning Practices', importance: 17.790,
     options: [
-      { label: 'Strongly Disagree', coef: 0 },
-      { label: 'Disagree', coef: -1.2453 },
-      { label: 'Neutral', coef: -3.9138 },
-      { label: 'Agree', coef: -0.7116 },
-      { label: 'Strongly Agree', coef: 1.6011 }
+      { label: 'Not at all', coef: 0 },
+      { label: 'To a small extent', coef: -1.2453 },
+      { label: 'To a moderate extent', coef: -3.9138 },
+      { label: 'To a great extent', coef: -0.7116 },
+      { label: 'To a very great extent', coef: 1.6011 }
     ]
   }
 ];
@@ -915,22 +923,31 @@ function renderQuestions() {
   let html = '';
   let globalIdx = 1;
 
-  QUESTIONS.forEach(q => {
-    html += `<div class="q-card" id="card-${q.id}">
-      <div class="q-header">
-        <div class="q-num">${String(globalIdx).padStart(2,'0')}</div>
-        <div>
-          <div class="q-text">${q.label}</div>
-        </div>
-      </div>
-      <div class="options-grid">`;
+  DIMENSIONS.forEach(dim => {
+    const dimQs = QUESTIONS.filter(q => q.dimension === dim);
+    html += `<div class="category-group">
+      <div class="category-label" style="color:${DIM_COLORS[dim]}">${dim}</div>`;
 
-    q.options.forEach((opt, i) => {
-      html += `<button class="option-btn" id="opt-${q.id}-${i}" onclick="selectOption('${q.id}', ${i}, ${opt.coef})">${opt.label}</button>`;
+    dimQs.forEach(q => {
+      html += `<div class="q-card" id="card-${q.id}">
+        <div class="q-header">
+          <div class="q-num">${String(globalIdx).padStart(2,'0')}</div>
+          <div>
+            <div class="q-text">${q.text || q.label}</div>
+            <div class="q-importance">${q.label} · Importance weight: ${q.importance.toFixed(3)}</div>
+          </div>
+        </div>
+        <div class="options-grid">`;
+
+      q.options.forEach((opt, i) => {
+        html += `<button class="option-btn" id="opt-${q.id}-${i}" onclick="selectOption('${q.id}', ${i}, ${opt.coef})">${opt.label}</button>`;
+      });
+
+      html += `</div></div>`;
+      globalIdx++;
     });
 
-    html += `</div></div>`;
-    globalIdx++;
+    html += `</div>`;
   });
 
   container.innerHTML = html;
@@ -1026,7 +1043,7 @@ function showResult(score, isLearning, dimScores) {
     <div class="result-hero">
       <div class="result-badge ${isLearning ? 'positive' : 'negative'}">
         <div class="result-icon">${isLearning ? '🌟' : '📊'}</div>
-        <div class="result-title">${isLearning ? 'Classification Result: Learning Organization' : 'Classification Result: Not a Learning Organization'}</div>
+        <div class="result-title">${isLearning ? 'Learning Organization' : 'Not Yet a Learning Organization'}</div>
         <div class="result-sub">${isLearning
           ? 'Your organization demonstrates the characteristics of a learning organization.'
           : 'Your organization has growth opportunities to become a learning organization.'
@@ -1066,7 +1083,7 @@ function showResult(score, isLearning, dimScores) {
           </div>
           <div class="score-row">
             <span class="label">Result</span>
-            <span class="value" style="color:${isLearning ? '#10b981' : '#ef4444'}">${isLearning ? '✓ Classified as Learning Organization (Above Threshold)' : '✗ Below Threshold'}</span>
+            <span class="value" style="color:${isLearning ? '#10b981' : '#ef4444'}">${isLearning ? '✓ Above Threshold' : '✗ Below Threshold'}</span>
           </div>
         </div>
       </div>
@@ -1080,7 +1097,7 @@ function showResult(score, isLearning, dimScores) {
     <div class="result-actions">
       <button class="btn-action btn-pdf" onclick="downloadPDF(${score}, ${isLearning})">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-        Download Assessment Report
+        Download PDF Report
       </button>
       <button class="btn-action btn-reset" onclick="resetAssessment()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.15"/></svg>
@@ -1221,18 +1238,7 @@ function downloadPDF(score, isLearning) {
   doc.setFontSize(8);
   doc.setFont('helvetica', 'bold');
   doc.text('DETAILED RESPONSES', margin, y);
-  y += 6;
-
-  // Table header
-  doc.setFillColor(26, 37, 64);
-  doc.rect(margin, y, W - margin * 2, 9, 'F');
-  doc.setTextColor(150, 180, 220);
-  doc.setFontSize(7);
-  doc.text('Q#', margin + 2, y + 6);
-  doc.text('Question', margin + 14, y + 6);
-  doc.text('Answer', margin + 80, y + 6);
-  doc.text('Contribution', margin + 148, y + 6);
-  y += 11;
+  y += 8;
 
   QUESTIONS.forEach((q, idx) => {
     const ans = answers[q.id];
@@ -1244,33 +1250,27 @@ function downloadPDF(score, isLearning) {
     }
 
     const contrib = q.importance * ans.coef;
-    const bg = idx % 2 === 0 ? [17, 24, 39] : [22, 33, 55];
+    const bg = idx % 2 === 0 ? [17, 24, 39] : [19, 30, 53];
     doc.setFillColor(...bg);
-    doc.rect(margin, y, W - margin * 2, 10, 'F');
+    doc.rect(margin, y, W - margin * 2, 11, 'F');
 
-    // Q#
     doc.setTextColor(100, 116, 139);
     doc.setFontSize(7.5);
     doc.setFont('helvetica', 'normal');
     doc.text(q.id, margin + 2, y + 7);
 
-    // Question label — truncate to fit column
-    doc.setTextColor(220, 230, 245);
-    const qLabel = q.label.length > 28 ? q.label.substring(0, 26) + '..' : q.label;
-    doc.text(qLabel, margin + 14, y + 7);
+    doc.setTextColor(241, 245, 249);
+    doc.text(q.label.substring(0, 30), margin + 16, y + 7);
 
-    // Answer — truncate to fit column
     doc.setTextColor(150, 180, 220);
-    const aLabel = q.options[ans.optIdx].label.length > 22 ? q.options[ans.optIdx].label.substring(0, 20) + '..' : q.options[ans.optIdx].label;
-    doc.text(aLabel, margin + 80, y + 7);
+    doc.text(q.options[ans.optIdx].label.substring(0, 28), margin + 90, y + 7);
 
-    // Contribution — right-aligned in its column
     const cColor = contrib >= 0 ? [16, 185, 129] : [239, 68, 68];
     doc.setTextColor(...cColor);
     doc.setFont('helvetica', 'bold');
-    doc.text((contrib >= 0 ? '+' : '') + contrib.toFixed(4), margin + 168, y + 7, { align: 'right' });
+    doc.text((contrib >= 0 ? '+' : '') + contrib.toFixed(4), margin + 154, y + 7);
 
-    y += 11;
+    y += 12;
   });
 
   // Footer
