@@ -751,7 +751,7 @@
 
 <script>
 const CONSTANT = 0.133;
-const THRESHOLD = 9.1864;
+const THRESHOLD = 15.0;   // re-estimated by grouped 5-fold CV on training folds only (was 9.1864)
 
 const QUESTIONS = [
   {
@@ -994,7 +994,7 @@ function submitAssessment() {
   let score = CONSTANT;
   QUESTIONS.forEach(q => {
     const ans = answers[q.id];
-    if (ans) score += q.importance * ans.coef;
+    if (ans) score += ans.coef;   // Eq. 1: S = 0.133 + sum(beta); beta already includes importance
   });
 
   const isLearning = score > THRESHOLD;
@@ -1005,7 +1005,7 @@ function submitAssessment() {
     let s = 0;
     QUESTIONS.filter(q => q.dimension === dim).forEach(q => {
       const ans = answers[q.id];
-      if (ans) s += q.importance * ans.coef;
+      if (ans) s += ans.coef;
     });
     dimScores[dim] = s;
   });
@@ -1017,7 +1017,7 @@ function showResult(score, isLearning, dimScores) {
   document.getElementById('form-section').classList.remove('active');
   document.getElementById('result-section').classList.add('active');
 
-  const pct = Math.min(100, Math.max(0, ((score + 50) / 200) * 100));
+  const pct = Math.min(100, Math.max(0, ((score + 10) / 40) * 100));
   const gaugeCirc = 2 * Math.PI * 54;
   const gaugeDash = gaugeCirc * (pct / 100);
 
@@ -1075,7 +1075,7 @@ function showResult(score, isLearning, dimScores) {
           </div>
           <div class="score-row">
             <span class="label">Threshold</span>
-            <span class="value">9.1864</span>
+            <span class="value">${THRESHOLD.toFixed(1)}</span>
           </div>
           <div class="score-row">
             <span class="label">Constant Term</span>
@@ -1172,7 +1172,7 @@ function downloadPDF(score, isLearning) {
 
   const scoreData = [
     ['Your Total Score', score.toFixed(4)],
-    ['Threshold Value', '9.1864'],
+    ['Threshold Value', THRESHOLD.toFixed(1)],
     ['Constant Term', '+0.133'],
     ['Verdict', isLearning ? 'Above Threshold' : 'Below Threshold']
   ];
@@ -1249,7 +1249,7 @@ function downloadPDF(score, isLearning) {
       y = 20;
     }
 
-    const contrib = q.importance * ans.coef;
+    const contrib = ans.coef;
     const bg = idx % 2 === 0 ? [17, 24, 39] : [19, 30, 53];
     doc.setFillColor(...bg);
     doc.rect(margin, y, W - margin * 2, 11, 'F');
